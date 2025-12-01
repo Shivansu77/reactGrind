@@ -10,7 +10,7 @@ const Body = () => {
     useEffect(()=>{
         fetchData();
     },[])
-
+//restraunt data from swiggy api
     const fetchData = async() =>{
       try {
         const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=31.3260&lng=75.5762');
