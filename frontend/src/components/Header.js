@@ -1,4 +1,7 @@
 import React, { useState,useEffect } from 'react';
+import {Link} from 'react-router-dom';
+import About from './About';
+import ContactUs from './ContactUs';
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
       useEffect(() => {
@@ -44,7 +47,9 @@ const Header = () => {
           }}
             onMouseOver={(e) => e.target.style.color = '#007bff'}
             onMouseOut={(e) => e.target.style.color = '#333'}
-          >Home</li>
+          >
+          <Link to='/'>Home</Link>
+            </li>
           <li style={{
             color: '#333',
             cursor: 'pointer',
@@ -54,7 +59,9 @@ const Header = () => {
           }}
             onMouseOver={(e) => e.target.style.color = '#007bff'}
             onMouseOut={(e) => e.target.style.color = '#333'}
-          >About</li>
+          >
+          <Link to='/about'>About</Link>
+            </li>
           <li style={{
             color: '#333',
             cursor: 'pointer',
@@ -64,7 +71,9 @@ const Header = () => {
           }}
             onMouseOver={(e) => e.target.style.color = '#007bff'}
             onMouseOut={(e) => e.target.style.color = '#333'}
-          >Contact</li>
+          >
+          <Link to='/contactus'>Contact</Link>
+            </li>
           <li style={{
             color: '#333',
             cursor: 'pointer',
