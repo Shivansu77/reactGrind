@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
+      useEffect(() => {
+        console.log("Component mounted or updated");
+      },[btnName]);
   return (
     <div
       className="navbar"

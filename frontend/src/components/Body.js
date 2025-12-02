@@ -44,11 +44,13 @@ const Body = () => {
         setFilteredRestaurants(filteredList);
     };
  
-    if(listofRestaurants.length === 0) {
-        return <Shimmer />;
-    }
+    useEffect(() => {
+      console.log("Component mounted or updated");
+    });
 
-  return (
+  return(listofRestaurants.length === 0)?(
+    <Shimmer/>
+  ):(
   <div style={{ padding: '20px', textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
     <div style={{ marginBottom: '30px' }}>
       <input 
