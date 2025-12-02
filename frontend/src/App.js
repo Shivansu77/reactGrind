@@ -2,7 +2,7 @@ import './App.css';
 import Header from './components/Header';
 import Body from './components/Body';
 
-function AppLayout() {
+function App() {
   return (
     <div className="App">
       <Header />
@@ -11,4 +11,4 @@ function AppLayout() {
   );
 }
 
-export default AppLayout;
+export default App;
