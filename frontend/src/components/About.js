@@ -12,7 +12,7 @@ const About = () => {
       </p>
 
       <User name="Shivansu"/>
-      <UserClass name="Shivansub"/>
+      <UserClass name="Shivansub" location="lonewala"/>
 
       <p>
         Our mission is to help food enthusiasts discover new culinary delights...
