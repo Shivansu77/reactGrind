@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import RestaurantCard from './RestaurantCard';
 import Shimmer from './Shimmer';
+import { Link } from 'react-router-dom';
 
 const Body = () => {
     const [listofRestaurants, setListofRestaurants] = useState([]);
@@ -43,76 +44,123 @@ const Body = () => {
         );
         setFilteredRestaurants(filteredList);
     };
- 
-    useEffect(() => {
-      console.log("Component mounted or updated");
-    });
+
 
   return(listofRestaurants.length === 0)?(
     <Shimmer/>
   ):(
-  <div style={{ padding: '20px', textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
-    <div style={{ marginBottom: '30px' }}>
-      <input 
-        onChange={(e) => setSearchText(e.target.value)} 
-        value={searchText} 
-        placeholder="Search restaurants..."
-        style={{
-          padding: '10px 15px',
-          fontSize: '16px',
-          borderRadius: '5px',
-          border: '1px solid #ccc',
-          marginRight: '10px',
-          width: '300px',
-          outline: 'none'
-        }}
-      />
-      <button 
-        onClick={handleSearch} 
-        style={{
-          backgroundColor: '#007bff', 
-          color: 'white', 
-          padding: '10px 20px', 
-          fontSize: '16px', 
-          border: 'none', 
-          borderRadius: '5px', 
-          cursor: 'pointer',
-          transition: 'background-color 0.3s'
-        }}
-        onMouseOver={(e) => e.target.style.backgroundColor = '#0056b3'}
-        onMouseOut={(e) => e.target.style.backgroundColor = '#007bff'}
-      >
-        Search
-      </button>
+  <div style={{ 
+    padding: '40px 20px', 
+    minHeight: '100vh',
+    backgroundColor: '#f8f9fa',
+    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' 
+  }}>
+    <div style={{ 
+      maxWidth: '1200px', 
+      margin: '0 auto',
+      marginBottom: '40px',
+      textAlign: 'center'
+    }}>
+      <h1 style={{
+        fontSize: '32px',
+        fontWeight: '700',
+        color: '#2c3e50',
+        marginBottom: '10px'
+      }}>Discover Great Food</h1>
+      <p style={{
+        fontSize: '16px',
+        color: '#7f8c8d',
+        marginBottom: '30px'
+      }}>Find your favorite restaurants and cuisines</p>
+      
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '15px',
+        flexWrap: 'wrap'
+      }}>
+        <input 
+          onChange={(e) => setSearchText(e.target.value)} 
+          value={searchText} 
+          placeholder="Search restaurants..."
+          style={{
+            padding: '12px 20px',
+            fontSize: '16px',
+            borderRadius: '25px',
+            border: '2px solid #e9ecef',
+            width: '350px',
+            outline: 'none',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+            transition: 'all 0.3s ease'
+          }}
+        />
+        <button 
+          onClick={handleSearch} 
+          style={{
+            backgroundColor: '#3498db', 
+            color: 'white', 
+            padding: '12px 25px', 
+            fontSize: '16px', 
+            border: 'none', 
+            borderRadius: '25px', 
+            cursor: 'pointer',
+            fontWeight: '600',
+            boxShadow: '0 4px 15px rgba(52, 152, 219, 0.3)',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseOver={(e) => {
+            e.target.style.backgroundColor = '#2980b9';
+            e.target.style.transform = 'translateY(-2px)';
+          }}
+          onMouseOut={(e) => {
+            e.target.style.backgroundColor = '#3498db';
+            e.target.style.transform = 'translateY(0)';
+          }}
+        >
+          🔍 Search
+        </button>
 
-      <button 
-        style={{ 
-          marginLeft: '20px', 
-          padding: '10px 20px', 
-          fontSize: '16px',
-          backgroundColor: '#28a745',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          transition: 'background-color 0.3s'
-        }} 
-        onClick={filterRestaurants}
-        onMouseOver={(e) => e.target.style.backgroundColor = '#218838'}
-        onMouseOut={(e) => e.target.style.backgroundColor = '#28a745'}
-      >
-        Filter Top Rated
-      </button>
+        <button 
+          style={{ 
+            padding: '12px 25px', 
+            fontSize: '16px',
+            backgroundColor: '#e74c3c',
+            color: 'white',
+            border: 'none',
+            borderRadius: '25px',
+            cursor: 'pointer',
+            fontWeight: '600',
+            boxShadow: '0 4px 15px rgba(231, 76, 60, 0.3)',
+            transition: 'all 0.3s ease'
+          }} 
+          onClick={filterRestaurants}
+          onMouseOver={(e) => {
+            e.target.style.backgroundColor = '#c0392b';
+            e.target.style.transform = 'translateY(-2px)';
+          }}
+          onMouseOut={(e) => {
+            e.target.style.backgroundColor = '#e74c3c';
+            e.target.style.transform = 'translateY(0)';
+          }}
+        >
+          ⭐ Top Rated
+        </button>
+      </div>
     </div>
 
     <div style={{ 
       display: 'grid', 
-      gridTemplateColumns: 'repeat(7, 1fr)', 
-      gap: '15px',
-      justifyContent: 'center' 
+      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+      gap: '25px',
+      maxWidth: '1400px',
+      margin: '0 auto',
+      padding: '0 20px'
     }}>
       {filteredRestaurants.map((resData) => (
-        <RestaurantCard key={resData.info?.id} resData={resData} />
+        <Link to={`/restaurant/${resData.info?.id}`} key={resData.info?.id} style={{ textDecoration: 'none' }}>
+          <RestaurantCard resData={resData} />
+        </Link>
       ))}
     </div>
   </div>

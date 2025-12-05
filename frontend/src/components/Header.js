@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import {Link} from 'react-router-dom';
-import About from './About';
-import ContactUs from './ContactUs';
+
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
       useEffect(() => {
@@ -11,20 +10,31 @@ const Header = () => {
     <div
       className="navbar"
       style={{
-        padding: '15px 40px',
-        backgroundColor: '#ffffff',
+        padding: '20px 40px',
+        backgroundColor: '#2ecc71',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
         position: 'sticky',
         top: 0,
-        zIndex: 1000
+        zIndex: 1000,
+        backdropFilter: 'blur(10px)'
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <img src="logo.png" alt="Logo" style={{ height: '50px' }} />
-        <span style={{ fontSize: '24px', fontWeight: 'bold', color: '#333' }}>FoodApp</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+        <img 
+          src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" 
+          alt="Logo" 
+          style={{ height: '50px', width: '50px' }} 
+        />
+        <span style={{ 
+          fontSize: '28px', 
+          fontWeight: '800', 
+          color: '#ffffff',
+          textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+          letterSpacing: '-0.5px'
+        }}>FoodApp</span>
       </div>
 
       <nav>
@@ -34,79 +44,113 @@ const Header = () => {
             margin: 0,
             padding: 0,
             display: 'flex',
-            gap: '30px',
+            gap: '35px',
             alignItems: 'center'
           }}
         >
+          <li>
+            <Link to='/' style={{
+              color: '#ffffff',
+              textDecoration: 'none',
+              fontSize: '16px',
+              fontWeight: '600',
+              padding: '8px 16px',
+              borderRadius: '20px',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseOver={(e) => {
+              e.target.style.backgroundColor = 'rgba(255,255,255,0.2)';
+              e.target.style.transform = 'translateY(-2px)';
+            }}
+            onMouseOut={(e) => {
+              e.target.style.backgroundColor = 'transparent';
+              e.target.style.transform = 'translateY(0)';
+            }}
+            >Home</Link>
+          </li>
+          <li>
+            <Link to='/about' style={{
+              color: '#ffffff',
+              textDecoration: 'none',
+              fontSize: '16px',
+              fontWeight: '600',
+              padding: '8px 16px',
+              borderRadius: '20px',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseOver={(e) => {
+              e.target.style.backgroundColor = 'rgba(255,255,255,0.2)';
+              e.target.style.transform = 'translateY(-2px)';
+            }}
+            onMouseOut={(e) => {
+              e.target.style.backgroundColor = 'transparent';
+              e.target.style.transform = 'translateY(0)';
+            }}
+            >About</Link>
+          </li>
+          <li>
+            <Link to='/contactus' style={{
+              color: '#ffffff',
+              textDecoration: 'none',
+              fontSize: '16px',
+              fontWeight: '600',
+              padding: '8px 16px',
+              borderRadius: '20px',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseOver={(e) => {
+              e.target.style.backgroundColor = 'rgba(255,255,255,0.2)';
+              e.target.style.transform = 'translateY(-2px)';
+            }}
+            onMouseOut={(e) => {
+              e.target.style.backgroundColor = 'transparent';
+              e.target.style.transform = 'translateY(0)';
+            }}
+            >Contact</Link>
+          </li>
           <li style={{
-            color: '#333',
+            color: '#ffffff',
             cursor: 'pointer',
             fontSize: '16px',
-            fontWeight: '500',
-            transition: 'color 0.3s'
+            fontWeight: '600',
+            padding: '8px 16px',
+            borderRadius: '20px',
+            transition: 'all 0.3s ease'
           }}
-            onMouseOver={(e) => e.target.style.color = '#007bff'}
-            onMouseOut={(e) => e.target.style.color = '#333'}
-          >
-          <Link to='/'>Home</Link>
-            </li>
-          <li style={{
-            color: '#333',
-            cursor: 'pointer',
-            fontSize: '16px',
-            fontWeight: '500',
-            transition: 'color 0.3s'
-          }}
-            onMouseOver={(e) => e.target.style.color = '#007bff'}
-            onMouseOut={(e) => e.target.style.color = '#333'}
-          >
-          <Link to='/about'>About</Link>
-            </li>
-          <li style={{
-            color: '#333',
-            cursor: 'pointer',
-            fontSize: '16px',
-            fontWeight: '500',
-            transition: 'color 0.3s'
-          }}
-            onMouseOver={(e) => e.target.style.color = '#007bff'}
-            onMouseOut={(e) => e.target.style.color = '#333'}
-          >
-          <Link to='/contactus'>Contact</Link>
-            </li>
-          <li style={{
-            color: '#333',
-            cursor: 'pointer',
-            fontSize: '16px',
-            fontWeight: '500',
-            transition: 'color 0.3s'
-          }}
-            onMouseOver={(e) => e.target.style.color = '#007bff'}
-            onMouseOut={(e) => e.target.style.color = '#333'}
+            onMouseOver={(e) => {
+              e.target.style.backgroundColor = 'rgba(255,255,255,0.2)';
+              e.target.style.transform = 'translateY(-2px)';
+            }}
+            onMouseOut={(e) => {
+              e.target.style.backgroundColor = 'transparent';
+              e.target.style.transform = 'translateY(0)';
+            }}
           >Cart</li>
           <button
             onClick={() => {
               btnName === 'Login' ? setBtnName('Logout') : setBtnName('Login')
             }}
             style={{
-              backgroundColor: '#007bff',
+              backgroundColor: '#27ae60',
               color: 'white',
               border: 'none',
-              padding: '10px 24px',
-              borderRadius: '6px',
+              padding: '12px 28px',
+              borderRadius: '25px',
               fontSize: '16px',
-              fontWeight: '500',
+              fontWeight: '700',
               cursor: 'pointer',
-              transition: 'background-color 0.3s, transform 0.2s',
-              boxShadow: '0 2px 4px rgba(0,123,255,0.2)'
+              transition: 'all 0.3s ease',
+              boxShadow: '0 4px 15px rgba(39,174,96,0.4)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
             }}
             onMouseOver={(e) => {
-              e.target.style.backgroundColor = '#0056b3';
-              e.target.style.transform = 'translateY(-1px)';
+              e.target.style.transform = 'translateY(-3px) scale(1.05)';
+              e.target.style.boxShadow = '0 8px 25px rgba(39,174,96,0.6)';
             }}
             onMouseOut={(e) => {
-              e.target.style.backgroundColor = '#007bff';
-              e.target.style.transform = 'translateY(0)';
+              e.target.style.transform = 'translateY(0) scale(1)';
+              e.target.style.boxShadow = '0 4px 15px rgba(39,174,96,0.4)';
             }}
           >{btnName}</button>
         </ul>
