@@ -1,27 +1,26 @@
 import React from 'react';
+import User from './User';
+import UserClass from './UserClass';
+
 const About = () => {
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <h1>About Us</h1>
+
       <p>
-        Welcome to our restaurant review application! We are dedicated to providing you with the best dining experiences by offering comprehensive reviews and ratings of restaurants in your area.
+        Welcome to our restaurant review application! We are dedicated to providing you with the best dining experiences...
       </p>
-      <h2>Our Mission</h2>
+
+      <User name="Shivansu"/>
+      <UserClass name="Shivansub"/>
+
       <p>
-        Our mission is to help food enthusiasts discover new and exciting dining options while making informed decisions based on honest reviews from fellow users.
+        Our mission is to help food enthusiasts discover new culinary delights...
       </p>
-      <h2>What We Offer</h2>
-      <ul>
-        <li>Extensive restaurant listings with detailed information</li>
-        <li>User-generated reviews and ratings</li>
-        <li>Search and filter options to find the perfect dining spot</li>
-        <li>Regular updates and new features to enhance your experience</li>
-      </ul>
-      <p>
-        Thank you for choosing our application for your restaurant reviews. We hope you enjoy exploring the culinary delights in your area!
-      </p>
+
+      <p>Thank you for being a part of our community. Happy dining!</p>
     </div>
   );
 };
 
-export default About;   
+export default About;
