@@ -5,14 +5,20 @@ class UserClass extends React.Component {
     super(props);
 
     this.state = {
-      count: 0
+      count: 0,
+      count2: 1
     };
+    console.log('Constructor called');
+  }
+
+  componentDidMount() {
+    console.log('Component did mount called');
   }
 
   render() {
     const { name, location } = this.props;
     const { count } = this.state;
-
+    console.log('Render called');
     return (
       <div className="user-card">
         <h1>Name : {name}</h1>

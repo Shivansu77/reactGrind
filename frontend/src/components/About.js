@@ -10,8 +10,6 @@ const About = () => {
       <p>
         Welcome to our restaurant review application! We are dedicated to providing you with the best dining experiences...
       </p>
-
-      <User name="Shivansu"/>
       <UserClass name="Shivansub" location="lonewala"/>
 
       <p>
