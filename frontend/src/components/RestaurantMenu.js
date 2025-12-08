@@ -1,25 +1,12 @@
-import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import Shimmer from './Shimmer';
-import { MENU_API_URL, CDN_URL, PLACEHOLDER_IMG } from '../utils/constants';
-
+import { CDN_URL, PLACEHOLDER_IMG } from '../utils/constants';
+import useRestaurantMenu from '../utils/useRestaurantMenu';
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
+  
   const { resId } = useParams();
-
-  const fetchMenu = useCallback(async () => {
-    try {
-      const data = await fetch(MENU_API_URL + resId);
-      const json = await data.json();
-      setResInfo(json?.data);
-    } catch (err) {
-      console.error("Failed to fetch menu:", err);
-    }
-  }, [resId]);
-
-  useEffect(() => {
-    fetchMenu();
-  }, [fetchMenu]);
+  const resInfo = useRestaurantMenu(resId);
+ 
 
   const { name, cuisines, costForTwoMessage } =
     resInfo?.cards?.[2]?.card?.card?.info || {};

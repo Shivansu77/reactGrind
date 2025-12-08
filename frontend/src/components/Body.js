@@ -128,11 +128,12 @@ const Body = () => {
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 300px))',
         gap: '20px',
         maxWidth: '1400px',
         margin: '0 auto',
-        padding: '0 10px'
+        padding: '0 10px',
+        justifyContent: 'center'
       }}>
         {filteredRestaurants.map((resData) => (
           <Link
