@@ -18,7 +18,7 @@ const Header = () => {
     <div
       style={{
         padding: '8px 30px',
-        backgroundColor: '#007bff',
+        backgroundColor: 'tomato',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -93,21 +93,23 @@ const Header = () => {
         <button
           onClick={() => setBtnName(btnName === 'Login' ? 'Logout' : 'Login')}
           style={{
-            backgroundColor: '#d86117ff',
+            backgroundColor: 'rgba(255,255,255,0.2)',
             color: '#fff',
-            border: 'none',
-            padding: '6px 16px',
+            border: '2px solid #fff',
+            padding: '6px 18px',
             borderRadius: '20px',
             fontSize: '14px',
-            fontWeight: '500',
+            fontWeight: '600',
             cursor: 'pointer',
             transition: '0.2s',
           }}
           onMouseOver={e => {
-            e.target.style.backgroundColor = '#219a52';
+            e.target.style.backgroundColor = '#fff';
+            e.target.style.color = 'tomato';
           }}
           onMouseOut={e => {
-            e.target.style.backgroundColor = '#27ae60';
+            e.target.style.backgroundColor = 'rgba(255,255,255,0.2)';
+            e.target.style.color = '#fff';
           }}
         >
           {btnName}
