@@ -62,13 +62,6 @@ const Body = () => {
         marginBottom: '30px',
         textAlign: 'center'
       }}>
-        <h1 style={{ fontSize: '32px', fontWeight: '700', color: '#2c3e50', marginBottom: '10px' }}>
-          Discover Great Food
-        </h1>
-        <p style={{ fontSize: '16px', color: '#7f8c8d', marginBottom: '25px' }}>
-          Find your favorite restaurants and cuisines
-        </p>
-
         <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
           <input
             onChange={(e) => setSearchText(e.target.value)}
