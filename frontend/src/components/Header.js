@@ -1,161 +1,120 @@
-import React, { useState,useEffect } from 'react';
-import {Link} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
-      useEffect(() => {
-        console.log("Component mounted or updated");
-      },[btnName]);
+
+  useEffect(() => {
+    console.log("Header mounted or updated:", btnName);
+  }, [btnName]);
+
+  const navLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contactus' },
+  ];
+
   return (
     <div
-      className="navbar"
       style={{
-        padding: '20px 40px',
-        backgroundColor: '#2ecc71',
+        padding: '8px 30px',
+        backgroundColor: '#007bff',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
         position: 'sticky',
         top: 0,
         zIndex: 1000,
-        backdropFilter: 'blur(10px)'
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+        height: '60px'
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-        <img 
-          src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" 
-          alt="Logo" 
-          style={{ height: '50px', width: '50px' }} 
+      {/* Logo */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png"
+          alt="Logo"
+          style={{ width: '32px', height: '32px' }}
         />
-        <span style={{ 
-          fontSize: '28px', 
-          fontWeight: '800', 
-          color: '#ffffff',
-          textShadow: '0 2px 4px rgba(0,0,0,0.3)',
-          letterSpacing: '-0.5px'
-        }}>FoodApp</span>
+        <span style={{
+          fontSize: '20px',
+          fontWeight: '700',
+          color: '#fff',
+        }}>BFC</span>
       </div>
 
-      <nav>
-        <ul
+      {/* Navigation */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+        <ul style={{
+          display: 'flex',
+          gap: '20px',
+          listStyle: 'none',
+          margin: 0,
+          padding: 0,
+        }}>
+          {navLinks.map(link => (
+            <li key={link.name}>
+              <Link
+                to={link.path}
+                style={{
+                  color: '#fff',
+                  textDecoration: 'none',
+                  fontWeight: '500',
+                  fontSize: '14px',
+                  padding: '4px 12px',
+                  borderRadius: '15px',
+                  transition: '0.2s',
+                }}
+                onMouseOver={e => e.target.style.backgroundColor = 'rgba(255,255,255,0.15)'}
+                onMouseOut={e => e.target.style.backgroundColor = 'transparent'}
+              >
+                {link.name}
+              </Link>
+            </li>
+          ))}
+          <li
+            style={{
+              color: '#fff',
+              fontWeight: '500',
+              fontSize: '14px',
+              padding: '4px 12px',
+              borderRadius: '15px',
+              cursor: 'pointer',
+              transition: '0.2s',
+            }}
+            onMouseOver={e => e.target.style.backgroundColor = 'rgba(255,255,255,0.15)'}
+            onMouseOut={e => e.target.style.backgroundColor = 'transparent'}
+          >
+            Cart
+          </li>
+        </ul>
+
+        {/* Login/Logout Button */}
+        <button
+          onClick={() => setBtnName(btnName === 'Login' ? 'Logout' : 'Login')}
           style={{
-            listStyleType: 'none',
-            margin: 0,
-            padding: 0,
-            display: 'flex',
-            gap: '35px',
-            alignItems: 'center'
+            backgroundColor: '#d86117ff',
+            color: '#fff',
+            border: 'none',
+            padding: '6px 16px',
+            borderRadius: '20px',
+            fontSize: '14px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            transition: '0.2s',
+          }}
+          onMouseOver={e => {
+            e.target.style.backgroundColor = '#219a52';
+          }}
+          onMouseOut={e => {
+            e.target.style.backgroundColor = '#27ae60';
           }}
         >
-          <li>
-            <Link to='/' style={{
-              color: '#ffffff',
-              textDecoration: 'none',
-              fontSize: '16px',
-              fontWeight: '600',
-              padding: '8px 16px',
-              borderRadius: '20px',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseOver={(e) => {
-              e.target.style.backgroundColor = 'rgba(255,255,255,0.2)';
-              e.target.style.transform = 'translateY(-2px)';
-            }}
-            onMouseOut={(e) => {
-              e.target.style.backgroundColor = 'transparent';
-              e.target.style.transform = 'translateY(0)';
-            }}
-            >Home</Link>
-          </li>
-          <li>
-            <Link to='/about' style={{
-              color: '#ffffff',
-              textDecoration: 'none',
-              fontSize: '16px',
-              fontWeight: '600',
-              padding: '8px 16px',
-              borderRadius: '20px',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseOver={(e) => {
-              e.target.style.backgroundColor = 'rgba(255,255,255,0.2)';
-              e.target.style.transform = 'translateY(-2px)';
-            }}
-            onMouseOut={(e) => {
-              e.target.style.backgroundColor = 'transparent';
-              e.target.style.transform = 'translateY(0)';
-            }}
-            >About</Link>
-          </li>
-          <li>
-            <Link to='/contactus' style={{
-              color: '#ffffff',
-              textDecoration: 'none',
-              fontSize: '16px',
-              fontWeight: '600',
-              padding: '8px 16px',
-              borderRadius: '20px',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseOver={(e) => {
-              e.target.style.backgroundColor = 'rgba(255,255,255,0.2)';
-              e.target.style.transform = 'translateY(-2px)';
-            }}
-            onMouseOut={(e) => {
-              e.target.style.backgroundColor = 'transparent';
-              e.target.style.transform = 'translateY(0)';
-            }}
-            >Contact</Link>
-          </li>
-          <li style={{
-            color: '#ffffff',
-            cursor: 'pointer',
-            fontSize: '16px',
-            fontWeight: '600',
-            padding: '8px 16px',
-            borderRadius: '20px',
-            transition: 'all 0.3s ease'
-          }}
-            onMouseOver={(e) => {
-              e.target.style.backgroundColor = 'rgba(255,255,255,0.2)';
-              e.target.style.transform = 'translateY(-2px)';
-            }}
-            onMouseOut={(e) => {
-              e.target.style.backgroundColor = 'transparent';
-              e.target.style.transform = 'translateY(0)';
-            }}
-          >Cart</li>
-          <button
-            onClick={() => {
-              btnName === 'Login' ? setBtnName('Logout') : setBtnName('Login')
-            }}
-            style={{
-              backgroundColor: '#27ae60',
-              color: 'white',
-              border: 'none',
-              padding: '12px 28px',
-              borderRadius: '25px',
-              fontSize: '16px',
-              fontWeight: '700',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 4px 15px rgba(39,174,96,0.4)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.5px'
-            }}
-            onMouseOver={(e) => {
-              e.target.style.transform = 'translateY(-3px) scale(1.05)';
-              e.target.style.boxShadow = '0 8px 25px rgba(39,174,96,0.6)';
-            }}
-            onMouseOut={(e) => {
-              e.target.style.transform = 'translateY(0) scale(1)';
-              e.target.style.boxShadow = '0 4px 15px rgba(39,174,96,0.4)';
-            }}
-          >{btnName}</button>
-        </ul>
-      </nav>
+          {btnName}
+        </button>
+      </div>
     </div>
   );
 };
+
 export default Header;
