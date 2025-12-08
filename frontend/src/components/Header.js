@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import useOnlineStatus from '../utils/useOnlineStatus';
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
-
+  const onlineStatus = useOnlineStatus();
   useEffect(() => {
     console.log("Header mounted or updated:", btnName);
   }, [btnName]);
@@ -87,6 +87,7 @@ const Header = () => {
           >
             Cart
           </li>
+          <li>{onlineStatus === false ? "🔴 Offline" : "🟢 Online"}</li>
         </ul>
 
         {/* Login/Logout Button */}
