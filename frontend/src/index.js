@@ -1,38 +1,51 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import About from './components/About';
 import ContactUs from './components/ContactUs';
 import Body from './components/Body';
 import RestaurantMenu from './components/RestaurantMenu';
-import {createBrowserRouter,RouterProvider} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+const Grocery = lazy(() => import('./components/Grocery'));
+const About = lazy(() => import('./components/About'));
 
 const appRouter = createBrowserRouter([
   {
-    path:"/",
-    element:<App/>,
-    children:[
+    path: "/",
+    element: <App />,
+    children: [
       {
-        path:"/", 
-        element:<Body/>
+        path: "/",
+        element: <Body />
       },
       {
-        path:"/about",
-        element:<About/>
+        path: "/about",
+        element: (
+          <Suspense fallback={<h2>Loading...</h2>}>
+            <About />
+          </Suspense>
+        )
       },
       {
-        path:"/contactus",
-        element:<ContactUs/>
+        path: "/contactus",
+        element: <ContactUs />
       },
       {
-        path:"/restaurant/:resId",
-        element:<RestaurantMenu/>
+        path: "/restaurant/:resId",
+        element: <RestaurantMenu />
+      },
+      {
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<h2>Loading...</h2>}>
+            <Grocery />
+          </Suspense>
+        )
       }
     ]
   }
 ]);
-//done
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<RouterProvider router={appRouter}/>);
+root.render(<RouterProvider router={appRouter} />);
