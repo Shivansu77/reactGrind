@@ -1,5 +1,5 @@
-const {useEffect, useState, useCallback} = require('react');
-const {MENU_API_URL} = require('./constants');
+import {useEffect, useState, useCallback} from 'react';
+import {MENU_API_URL} from './constants';
 
 const useRestaurantMenu = (resId) => {
     const [resInfo, setResInfo] = useState(null);

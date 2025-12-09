@@ -1,7 +1,9 @@
-const React = require('react');
+import React from 'react';
+
 const Grocery = () => {
-return (
+  return (
     <h1>Grocery Component</h1>
-)}
+  );
+}
 
 export default Grocery;

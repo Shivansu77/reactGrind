@@ -15,58 +15,25 @@ const Header = () => {
   ];
 
   return (
-    <div
-      style={{
-        padding: '8px 30px',
-        backgroundColor: 'tomato',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        position: 'sticky',
-        top: 0,
-        zIndex: 1000,
-        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-        height: '60px'
-      }}
-    >
+    <div className="sticky top-0 z-[1000] flex h-[60px] items-center justify-between bg-[#d46336eb] px-[30px] py-2 shadow-md">
       {/* Logo */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <div className="flex items-center gap-2">
         <img
           src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png"
           alt="Logo"
-          style={{ width: '32px', height: '32px' }}
+          className="h-8 w-8"
         />
-        <span style={{
-          fontSize: '20px',
-          fontWeight: '700',
-          color: '#fff',
-        }}>BFC</span>
+        <span className="text-xl font-bold text-white">BFC</span>
       </div>
 
       {/* Navigation */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-        <ul style={{
-          display: 'flex',
-          gap: '20px',
-          listStyle: 'none',
-          margin: 0,
-          padding: 0,
-        }}>
+      <div className="flex items-center gap-[15px]">
+        <ul className="flex list-none gap-5 m-0 p-0">
           {navLinks.map(link => (
             <li key={link.name}>
               <Link
                 to={link.path}
-                style={{
-                  color: '#fff',
-                  textDecoration: 'none',
-                  fontWeight: '500',
-                  fontSize: '14px',
-                  padding: '4px 12px',
-                  borderRadius: '15px',
-                  transition: '0.2s',
-                }}
-                onMouseOver={e => e.target.style.backgroundColor = 'rgba(255,255,255,0.15)'}
-                onMouseOut={e => e.target.style.backgroundColor = 'transparent'}
+                className="text-white no-underline font-medium text-sm px-3 py-1 rounded-[15px] transition-all hover:bg-white/15"
               >
                 {link.name}
               </Link>
@@ -75,46 +42,18 @@ const Header = () => {
           <li>
             <Link
               to="/grocery"
-              style={{
-                color: '#fff',
-                textDecoration: 'none',
-                fontWeight: '500',
-                fontSize: '14px',
-                padding: '4px 12px',
-                borderRadius: '15px',
-                transition: '0.2s',
-              }}
-              onMouseOver={e => e.target.style.backgroundColor = 'rgba(255,255,255,0.15)'}
-              onMouseOut={e => e.target.style.backgroundColor = 'transparent'}
+              className="text-white no-underline font-medium text-sm px-3 py-1 rounded-[15px] transition-all hover:bg-white/15"
             >
               Cart
             </Link>
           </li>
-          <li>{onlineStatus === false ? "🔴 Offline" : "🟢 Online"}</li>
+          <li className="text-white">{onlineStatus === false ? "🔴 Offline" : "🟢 Online"}</li>
         </ul>
 
         {/* Login/Logout Button */}
         <button
           onClick={() => setBtnName(btnName === 'Login' ? 'Logout' : 'Login')}
-          style={{
-            backgroundColor: 'rgba(255,255,255,0.2)',
-            color: '#fff',
-            border: '2px solid #fff',
-            padding: '6px 18px',
-            borderRadius: '20px',
-            fontSize: '14px',
-            fontWeight: '600',
-            cursor: 'pointer',
-            transition: '0.2s',
-          }}
-          onMouseOver={e => {
-            e.target.style.backgroundColor = '#fff';
-            e.target.style.color = 'tomato';
-          }}
-          onMouseOut={e => {
-            e.target.style.backgroundColor = 'rgba(255,255,255,0.2)';
-            e.target.style.color = '#fff';
-          }}
+          className="bg-white/20 text-white border-2 border-white px-[18px] py-1.5 rounded-[20px] text-sm font-semibold cursor-pointer transition-all hover:bg-white hover:text-[tomato]"
         >
           {btnName}
         </button>
