@@ -72,20 +72,23 @@ const Header = () => {
               </Link>
             </li>
           ))}
-          <li
-            style={{
-              color: '#fff',
-              fontWeight: '500',
-              fontSize: '14px',
-              padding: '4px 12px',
-              borderRadius: '15px',
-              cursor: 'pointer',
-              transition: '0.2s',
-            }}
-            onMouseOver={e => e.target.style.backgroundColor = 'rgba(255,255,255,0.15)'}
-            onMouseOut={e => e.target.style.backgroundColor = 'transparent'}
-          >
-            Cart
+          <li>
+            <Link
+              to="/grocery"
+              style={{
+                color: '#fff',
+                textDecoration: 'none',
+                fontWeight: '500',
+                fontSize: '14px',
+                padding: '4px 12px',
+                borderRadius: '15px',
+                transition: '0.2s',
+              }}
+              onMouseOver={e => e.target.style.backgroundColor = 'rgba(255,255,255,0.15)'}
+              onMouseOut={e => e.target.style.backgroundColor = 'transparent'}
+            >
+              Cart
+            </Link>
           </li>
           <li>{onlineStatus === false ? "🔴 Offline" : "🟢 Online"}</li>
         </ul>
