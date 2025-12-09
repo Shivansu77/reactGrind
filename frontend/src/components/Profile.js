@@ -1,14 +1,26 @@
-import React from 'react';
-const { useEffect} = React;
+import React, { useState, useEffect } from 'react';
 
 const Profile = () => {
+  const [githubData, setGithubData] = useState(null);
   
   useEffect(() => {
-    const timer = setInterval(() => {
-      console.log("Profile Component Mounted");
-    }, 1000);
-    return () => clearInterval(timer);
+    fetchGithubData();
   }, []);
+
+  const fetchGithubData = async () => {
+    try {
+      const response = await fetch('https://api.github.com/users/shivansu77');
+      const data = await response.json();
+      setGithubData(data);
+    } catch (error) {
+      console.error('Failed to fetch GitHub data:', error);
+    }
+  };
+
+  if (!githubData) {
+    return <div style={{ textAlign: 'center', padding: '20px' }}>Loading...</div>;
+  }
+
   return (
     <div style={{
       padding: '20px',
@@ -24,7 +36,7 @@ const Profile = () => {
         gap: '20px'
       }}>
         <img 
-          src="https://via.placeholder.com/100" 
+          src={githubData.avatar_url} 
           alt="Profile" 
           style={{
             width: '100px',
@@ -34,10 +46,11 @@ const Profile = () => {
           }}
         />
         <div>
-          <h3 style={{ margin: '0 0 8px 0', color: '#2c3e50' }}>Shivansub Bisht</h3>
-          <p style={{ margin: '0 0 5px 0', color: '#7f8c8d' }}>Founder & CEO</p>
-          <p style={{ margin: '0', color: '#7f8c8d' }}>Location: Lonewala</p>
-          <p style={{ margin: '5px 0 0 0', color: '#7f8c8d' }}>Contact: @Shark77su</p>
+          <h3 style={{ margin: '0 0 8px 0', color: '#2c3e50' }}>{githubData.name || githubData.login}</h3>
+          <p style={{ margin: '0 0 5px 0', color: '#7f8c8d' }}>{githubData.bio || 'Founder & CEO'}</p>
+          <p style={{ margin: '0', color: '#7f8c8d' }}>Location: {githubData.location || 'Not specified'}</p>
+          <p style={{ margin: '5px 0 0 0', color: '#7f8c8d' }}>GitHub: @{githubData.login}</p>
+          <p style={{ margin: '5px 0 0 0', color: '#7f8c8d' }}>Followers: {githubData.followers} | Following: {githubData.following}</p>
         </div>
       </div>
     </div>
