@@ -15,48 +15,50 @@ const Header = () => {
   ];
 
   return (
-    <div className="sticky top-0 z-[1000] flex h-[70px] items-center justify-between bg-red-400 px-[30px] py-2 shadow-md">
-      {/* Logo */}
-      <div className="flex items-center gap-2">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png"
-          alt="Logo"
-          className="h-8 w-8"
-        />
-        <span className="text-xl font-bold text-white">BFC</span>
-      </div>
+    <div className="sticky top-0 z-[1000] bg-white shadow-lg border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-3 no-underline">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png"
+            alt="Logo"
+            className="h-10 w-10"
+          />
+          <span className="text-2xl font-bold text-orange-600">BFC</span>
+        </Link>
 
-      {/* Navigation */}
-      <div className="flex items-center gap-[15px]">
-        <ul className="flex list-none gap-5 m-0 p-0">
-          {navLinks.map(link => (
-            <li key={link.name}>
+        {/* Navigation */}
+        <div className="flex items-center gap-8">
+          <ul className="flex list-none gap-8 m-0 p-0 items-center">
+            {navLinks.map(link => (
+              <li key={link.name}>
+                <Link
+                  to={link.path}
+                  className="text-gray-700 no-underline font-medium text-base hover:text-orange-600 transition-colors"
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+            <li>
               <Link
-                to={link.path}
-                className="text-white no-underline font-medium text-sm px-3 py-1 rounded-[15px] transition-all hover:bg-white/15"
+                to="/grocery"
+                className="text-gray-700 no-underline font-medium text-base hover:text-orange-600 transition-colors flex items-center gap-1"
               >
-                {link.name}
+                🛒 Cart
               </Link>
             </li>
-          ))}
-          <li>
-            <Link
-              to="/grocery"
-              className="text-white no-underline font-medium text-sm px-3 py-1 rounded-[15px] transition-all hover:bg-white/15"
-            >
-              Cart
-            </Link>
-          </li>
-          <li className="text-white">{onlineStatus === false ? "🔴 Offline" : "🟢 Online"}</li>
-        </ul>
+            <li className="text-sm font-medium">{onlineStatus === false ? "🔴 Offline" : "🟢 Online"}</li>
+          </ul>
 
-        {/* Login/Logout Button */}
-        <button
-          onClick={() => setBtnName(btnName === 'Login' ? 'Logout' : 'Login')}
-          className="bg-white/20 text-white border-2 border-white px-[18px] py-1.5 rounded-[20px] text-sm font-semibold cursor-pointer transition-all hover:bg-white hover:text-[tomato]"
-        >
-          {btnName}
-        </button>
+          {/* Login/Logout Button */}
+          <button
+            onClick={() => setBtnName(btnName === 'Login' ? 'Logout' : 'Login')}
+            className="bg-orange-600 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-700 transition-colors shadow-sm"
+          >
+            {btnName}
+          </button>
+        </div>
       </div>
     </div>
   );
