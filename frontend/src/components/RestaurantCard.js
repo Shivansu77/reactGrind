@@ -15,7 +15,7 @@ const RestaurantCard = ({ resData }) => {
         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
       }}
       onMouseOver={(e) => {
-        e.currentTarget.style.transform = 'translateY(-5px)';
+        e.currentTarget.style.transform = 'translateY(-6px)';
         e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
       }}
       onMouseOut={(e) => {
