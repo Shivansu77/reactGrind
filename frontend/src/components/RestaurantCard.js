@@ -20,7 +20,7 @@ const RestaurantCard = ({ resData }) => {
       }}
       onMouseOut={(e) => {
         e.currentTarget.style.transform = 'translateY(0)';
-        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.07)';
       }}
     >
       <div style={{ width: '100%', height: '180px', overflow: 'hidden' }}>
