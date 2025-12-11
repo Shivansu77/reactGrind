@@ -50,7 +50,7 @@ const Body = () => {
   const onlineStatus = useOnlineStatus();
   if (onlineStatus === false) return <h1>🔴 You are offline! Please check your internet connection.</h1>;
   if (listofRestaurants.length === 0) return <Shimmer />;
-
+  console.log("Body Rendered", listofRestaurants);
   return (
     <div style={{
       padding: '40px 20px',
