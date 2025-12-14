@@ -57,7 +57,7 @@ const RestaurantMenu = () => {
                   src={`${CDN_URL}w_208,h_208,c_fit/${item?.card?.info?.imageId}`}
                   alt={item?.card?.info?.name}
                   onError={(e) => (e.target.src = PLACEHOLDER_IMG)}
-                  style={{ width: '120px', height: '120px', objectFit: 'cover', borderRadius: '12px', marginLeft: '20px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}
+                  style={{ width: '130px', height: '120px', objectFit: 'cover', borderRadius: '12px', marginLeft: '20px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}
                 />
               )}
             </div>
