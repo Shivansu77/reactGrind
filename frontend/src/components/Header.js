@@ -54,8 +54,7 @@ const Header = () => {
           {/* Login/Logout Button */}
           <button
             onClick={() => setBtnName(btnName === 'Login' ? 'Logout' : 'Login')}
-            className="bg-gray-800 text-white px-5 py-2 rounded-md text-sm font-semibold hover:bg-gray-700 transition-colors shadow-sm"
-            style={{border: '1px solid rgba(255,255,255,0.06)'}}
+            className="bg-gray-800 text-white px-5 py-2 rounded-md text-sm font-semibold hover:bg-gray-700 transition-colors shadow-sm border border-white/6"
           >
             {btnName}
           </button>

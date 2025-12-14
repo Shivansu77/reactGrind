@@ -18,39 +18,24 @@ const Profile = () => {
   };
 
   if (!githubData) {
-    return <div style={{ textAlign: 'center', padding: '20px' }}>Loading...</div>;
+    return <div className="text-center p-5">Loading...</div>;
   }
 
   return (
-    <div style={{
-      padding: '20px',
-      backgroundColor: '#111',
-      borderRadius: '12px',
-      margin: '20px 0',
-      boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
-    }}>
-      <h2 style={{ color: '#2ecc71', marginBottom: '15px' }}>Our Team</h2>
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '20px'
-      }}>
-        <img 
-          src={githubData.avatar_url} 
-          alt="Profile" 
-          style={{
-            width: '100px',
-            height: '100px',
-            borderRadius: '50%',
-            objectFit: 'cover'
-          }}
+    <div className="p-5 bg-gray-900 rounded-lg my-5 shadow-md">
+      <h2 className="text-green-500 mb-4">Our Team</h2>
+      <div className="flex items-center gap-5">
+        <img
+          src={githubData.avatar_url}
+          alt="Profile"
+          className="w-24 h-24 rounded-full object-cover"
         />
         <div>
-          <h3 style={{ margin: '0 0 8px 0', color: '#e6e6e6' }}>{githubData.name || githubData.login}</h3>
-          <p style={{ margin: '0 0 5px 0', color: '#cfcfcf' }}>{githubData.bio || 'Founder & CEO'}</p>
-          <p style={{ margin: '0', color: '#cfcfcf' }}>Location: {githubData.location || 'Not specified'}</p>
-          <p style={{ margin: '5px 0 0 0', color: '#cfcfcf' }}>GitHub: @{githubData.login}</p>
-          <p style={{ margin: '5px 0 0 0', color: '#cfcfcf' }}>Followers: {githubData.followers} | Following: {githubData.following}</p>
+          <h3 className="m-0 text-gray-100">{githubData.name || githubData.login}</h3>
+          <p className="m-0 text-gray-300">{githubData.bio || 'Founder & CEO'}</p>
+          <p className="m-0 text-gray-300">Location: {githubData.location || 'Not specified'}</p>
+          <p className="m-0 text-gray-300">GitHub: @{githubData.login}</p>
+          <p className="m-0 text-gray-300">Followers: {githubData.followers} | Following: {githubData.following}</p>
         </div>
       </div>
     </div>

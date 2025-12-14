@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { RestaurantCard, withVegLabel } from './RestaurantCard';
-import Shimmer from './Shimmer';
-import { Link } from 'react-router-dom';
-import useOnlineStatus from '../utils/useOnlineStatus';
-
+import React, { useState, useEffect } from "react";
+import { RestaurantCard, withVegLabel } from "./RestaurantCard";
+import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
+import '../index.css';
 const Body = () => {
   const [listofRestaurants, setListofRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
@@ -17,38 +17,40 @@ const Body = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        'https://www.swiggy.com/dapi/restaurants/list/v5?lat=31.3260&lng=75.5762'
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=31.3260&lng=75.5762"
       );
 
       if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `Network response was not ok: ${response.status} ${response.statusText}`
+        );
       }
 
       const json = await response.json();
-      console.log('Fetched restaurant data:', json);
 
-      // Collect restaurants from any card that has them (some responses split lists)
       const cards = json?.data?.cards || [];
       let restaurants = [];
 
       cards.forEach((card) => {
-        const arr = card?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        const arr =
+          card?.card?.card?.gridElements?.infoWithStyle?.restaurants;
         if (Array.isArray(arr) && arr.length) restaurants.push(...arr);
 
-        // sometimes restaurants are nested deeper inside card.card.cards
         const innerCards = card?.card?.card?.cards;
         if (Array.isArray(innerCards)) {
           innerCards.forEach((inner) => {
-            const arr2 = inner?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-            if (Array.isArray(arr2) && arr2.length) restaurants.push(...arr2);
+            const arr2 =
+              inner?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+            if (Array.isArray(arr2) && arr2.length)
+              restaurants.push(...arr2);
           });
         }
       });
 
-      // remove falsy and deduplicate by id
       restaurants = restaurants.filter(Boolean);
       const seen = new Set();
       const unique = [];
+
       restaurants.forEach((r) => {
         const id = r?.info?.id;
         if (id && !seen.has(id)) {
@@ -57,148 +59,115 @@ const Body = () => {
         }
       });
 
-      if (unique.length > 0) {
-        console.log(`Found ${unique.length} restaurants across cards`);
-        setListofRestaurants(unique);
-        setFilteredRestaurants(unique);
-        return;
-      }
-
-      console.warn('Restaurants payload not found in API response.');
-      return;
+      setListofRestaurants(unique);
+      setFilteredRestaurants(unique);
     } catch (error) {
-      console.error('Failed to fetch restaurants:', error);
-      return;
+      console.error("Failed to fetch restaurants:", error);
     }
-  }
+  };
 
   const filterRestaurants = () => {
-    const filteredList = listofRestaurants.filter(res =>
-      (res.info?.name || res.resName).length > 15
+    const filteredList = listofRestaurants.filter(
+      (res) => (res.info?.name || res.resName).length > 15
     );
     setFilteredRestaurants(filteredList);
   };
 
   const handleSearch = () => {
-    const filteredList = listofRestaurants.filter(res =>
+    const filteredList = listofRestaurants.filter((res) =>
       res.info?.name?.toLowerCase().includes(searchText.toLowerCase())
     );
     setFilteredRestaurants(filteredList);
   };
+
   const onlineStatus = useOnlineStatus();
-  if (onlineStatus === false) return <h1>🔴 You are offline! Please check your internet connection.</h1>;
+  if (!onlineStatus)
+    return (
+      <h1 className="text-center text-red-500 font-semibold mt-10">
+        🔴 You are offline! Please check your internet connection.
+      </h1>
+    );
+
   if (listofRestaurants.length === 0) return <Shimmer />;
-  console.log("Body Rendered", listofRestaurants);
+
   return (
-    <div style={{
-      padding: '40px 20px',
-      minHeight: '100vh',
-      backgroundColor: '#000',
-      color: '#e6e6e6',
-      fontFamily: 'Inter, sans-serif'
-    }}>
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        marginBottom: '30px',
-        textAlign: 'center'
-      }}>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
+    <div className="min-h-screen bg-black text-gray-200 font-inter px-5 py-10">
+      {/* Search Section */}
+      <div className="max-w-[1200px] mx-auto mb-8 text-center">
+        <div className="flex flex-wrap justify-center gap-3">
+          {/* Search Input */}
           <input
-            onChange={(e) => setSearchText(e.target.value)}
             value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
             placeholder="Search restaurants..."
             aria-label="Search restaurants"
-            style={{
-              padding: '10px 18px',
-              fontSize: '15px',
-              borderRadius: '999px',
-              border: '1px solid rgba(255,255,255,0.06)',
-              width: '320px',
-              outline: 'none',
-              boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.6)',
-              backgroundColor: '#0b0b0b',
-              color: '#e6e6e6',
-              caretColor: '#fff',
-              transition: 'box-shadow 0.15s ease, border-color 0.15s ease'
-            }}
-            onFocus={(e) => { e.currentTarget.style.boxShadow = '0 4px 18px rgba(30,136,229,0.08)'; e.currentTarget.style.borderColor = 'rgba(30,136,229,0.5)'; }}
-            onBlur={(e) => { e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(0,0,0,0.6)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; }}
+            className="
+              w-80 px-5 py-2.5 text-[15px] rounded-full
+              bg-[#0b0b0b] text-gray-200 caret-white
+              border border-white/10 outline-none
+              shadow-inner shadow-black/60
+              transition-all duration-150
+              focus:border-blue-500/60
+              focus:shadow-[0_4px_18px_rgba(30,136,229,0.08)]
+            "
           />
 
+          {/* Search Button */}
           <button
             onClick={handleSearch}
             aria-label="Search"
-            style={{
-              backgroundColor: 'transparent',
-              color: '#cfe9ff',
-              padding: '8px 14px',
-              fontSize: '15px',
-              border: '1px solid rgba(255,255,255,0.06)',
-              borderRadius: '10px',
-              cursor: 'pointer',
-              fontWeight: '600',
-              transition: 'border-color 120ms ease, background-color 120ms ease',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px'
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(30,136,229,0.36)'; e.currentTarget.style.backgroundColor = 'rgba(30,136,229,0.04)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; e.currentTarget.style.backgroundColor = 'transparent'; }}
+            className="
+              flex items-center gap-2
+              px-4 py-2 text-[15px] font-semibold
+              text-blue-200
+              border border-white/10 rounded-lg
+              transition-all duration-150
+              hover:border-blue-500/40
+              hover:bg-blue-500/5
+            "
           >
-            <span style={{fontSize: '16px'}}>🔍</span>
-            <span style={{opacity: 0.95}}>Search</span>
+            <span className="text-base">🔍</span>
+            <span className="opacity-95">Search</span>
           </button>
 
+          {/* Top Rated Button */}
           <button
             onClick={filterRestaurants}
-            style={{
-              backgroundColor: 'transparent',
-              color: '#ffd54f',
-              padding: '10px 20px',
-              fontSize: '15px',
-              border: '1px solid rgba(255,213,79,0.12)',
-              borderRadius: '999px',
-              cursor: 'pointer',
-              fontWeight: '700',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              transition: 'background-color 140ms ease, border-color 140ms ease'
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(255,213,79,0.06)'; e.currentTarget.style.borderColor = 'rgba(255,213,79,0.28)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.borderColor = 'rgba(255,213,79,0.12)'; }}
+            className="
+              flex items-center gap-2
+              px-5 py-2.5 text-[15px] font-bold
+              text-yellow-400
+              border border-yellow-400/20 rounded-full
+              transition-all duration-150
+              hover:bg-yellow-400/10
+              hover:border-yellow-400/40
+            "
           >
-            <span style={{fontSize: '14px'}}>⭐</span>
+            <span className="text-sm">⭐</span>
             Top Rated
           </button>
         </div>
       </div>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 300px))',
-        gap: '20px',
-        maxWidth: '1400px',
-        margin: '0 auto',
-        padding: '0 10px',
-        justifyContent: 'center'
-      }}>
+      {/* Restaurant Grid */}
+      <div
+        className="
+          max-w-[1400px] mx-auto px-2.5
+          grid gap-5 justify-center
+          grid-cols-[repeat(auto-fill,minmax(280px,300px))]
+        "
+      >
         {filteredRestaurants.map((resData) => (
           <Link
             to={`/restaurant/${resData.info?.id}`}
             key={resData.info?.id}
-            style={{ textDecoration: 'none' }}
+            className="no-underline"
           >
-            {/** if the restaurant is veg then add a veg label to it */
-            
-              resData.info?.veg ? (
-                <RestaurantCardWithVegLabel resData={resData} />
-              ) : (
-                <RestaurantCard resData={resData} />
-              )
-            }
-            
+            {resData.info?.veg ? (
+              <RestaurantCardWithVegLabel resData={resData} />
+            ) : (
+              <RestaurantCard resData={resData} />
+            )}
           </Link>
         ))}
       </div>
