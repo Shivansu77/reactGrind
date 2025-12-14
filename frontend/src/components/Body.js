@@ -15,10 +15,15 @@ const Body = () => {
 
   const fetchData = async () => {
     try {
-      const data = await fetch(
+      const response = await fetch(
         'https://www.swiggy.com/dapi/restaurants/list/v5?lat=31.3260&lng=75.5762'
       );
-      const json = await data.json();
+
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
+      }
+
+      const json = await response.json();
 
       const restaurantCard = json?.data?.cards?.find(card =>
         card?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -28,9 +33,15 @@ const Body = () => {
         const restaurants = restaurantCard.card.card.gridElements.infoWithStyle.restaurants;
         setListofRestaurants(restaurants);
         setFilteredRestaurants(restaurants);
+        return;
       }
+
+      // If payload shape isn't present, log and return (no mock fallback)
+      console.warn('Restaurants payload not found in API response.');
+      return;
     } catch (error) {
       console.error('Failed to fetch restaurants:', error);
+      return;
     }
   }
 
