@@ -24,7 +24,7 @@ const Profile = () => {
   return (
     <div style={{
       padding: '20px',
-      backgroundColor: '#f8f9fa',
+      backgroundColor: '#111',
       borderRadius: '12px',
       margin: '20px 0',
       boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
@@ -46,11 +46,11 @@ const Profile = () => {
           }}
         />
         <div>
-          <h3 style={{ margin: '0 0 8px 0', color: '#2c3e50' }}>{githubData.name || githubData.login}</h3>
-          <p style={{ margin: '0 0 5px 0', color: '#7f8c8d' }}>{githubData.bio || 'Founder & CEO'}</p>
-          <p style={{ margin: '0', color: '#7f8c8d' }}>Location: {githubData.location || 'Not specified'}</p>
-          <p style={{ margin: '5px 0 0 0', color: '#7f8c8d' }}>GitHub: @{githubData.login}</p>
-          <p style={{ margin: '5px 0 0 0', color: '#7f8c8d' }}>Followers: {githubData.followers} | Following: {githubData.following}</p>
+          <h3 style={{ margin: '0 0 8px 0', color: '#e6e6e6' }}>{githubData.name || githubData.login}</h3>
+          <p style={{ margin: '0 0 5px 0', color: '#cfcfcf' }}>{githubData.bio || 'Founder & CEO'}</p>
+          <p style={{ margin: '0', color: '#cfcfcf' }}>Location: {githubData.location || 'Not specified'}</p>
+          <p style={{ margin: '5px 0 0 0', color: '#cfcfcf' }}>GitHub: @{githubData.login}</p>
+          <p style={{ margin: '5px 0 0 0', color: '#cfcfcf' }}>Followers: {githubData.followers} | Following: {githubData.following}</p>
         </div>
       </div>
     </div>

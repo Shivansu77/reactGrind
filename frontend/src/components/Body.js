@@ -93,7 +93,8 @@ const Body = () => {
     <div style={{
       padding: '40px 20px',
       minHeight: '100vh',
-      backgroundColor: '#f5f5f5',
+      backgroundColor: '#000',
+      color: '#e6e6e6',
       fontFamily: 'Inter, sans-serif'
     }}>
       <div style={{
@@ -107,54 +108,69 @@ const Body = () => {
             onChange={(e) => setSearchText(e.target.value)}
             value={searchText}
             placeholder="Search restaurants..."
+            aria-label="Search restaurants"
             style={{
               padding: '10px 18px',
               fontSize: '15px',
-              borderRadius: '20px',
-              border: '1px solid #ddd',
-              width: '300px',
+              borderRadius: '999px',
+              border: '1px solid rgba(255,255,255,0.06)',
+              width: '320px',
               outline: 'none',
-              boxShadow: 'none',
-              transition: 'all 0.2s ease'
+              boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.6)',
+              backgroundColor: '#0b0b0b',
+              color: '#e6e6e6',
+              caretColor: '#fff',
+              transition: 'box-shadow 0.15s ease, border-color 0.15s ease'
             }}
+            onFocus={(e) => { e.currentTarget.style.boxShadow = '0 4px 18px rgba(30,136,229,0.08)'; e.currentTarget.style.borderColor = 'rgba(30,136,229,0.5)'; }}
+            onBlur={(e) => { e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(0,0,0,0.6)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; }}
           />
 
           <button
             onClick={handleSearch}
+            aria-label="Search"
             style={{
-              backgroundColor: '#3498db',
-              color: '#fff',
-              padding: '10px 22px',
+              backgroundColor: 'transparent',
+              color: '#cfe9ff',
+              padding: '8px 14px',
               fontSize: '15px',
-              border: 'none',
-              borderRadius: '20px',
+              border: '1px solid rgba(255,255,255,0.06)',
+              borderRadius: '10px',
               cursor: 'pointer',
-              fontWeight: '500',
-              transition: '0.2s'
+              fontWeight: '600',
+              transition: 'border-color 120ms ease, background-color 120ms ease',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
             }}
-            onMouseOver={(e) => e.target.style.backgroundColor = '#2980b9'}
-            onMouseOut={(e) => e.target.style.backgroundColor = '#3498db'}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(30,136,229,0.36)'; e.currentTarget.style.backgroundColor = 'rgba(30,136,229,0.04)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; e.currentTarget.style.backgroundColor = 'transparent'; }}
           >
-            🔍 Search
+            <span style={{fontSize: '16px'}}>🔍</span>
+            <span style={{opacity: 0.95}}>Search</span>
           </button>
 
           <button
             onClick={filterRestaurants}
             style={{
-              backgroundColor: '#e74c3c',
-              color: '#fff',
-              padding: '10px 22px',
+              backgroundColor: 'transparent',
+              color: '#ffd54f',
+              padding: '10px 20px',
               fontSize: '15px',
-              border: 'none',
-              borderRadius: '20px',
+              border: '1px solid rgba(255,213,79,0.12)',
+              borderRadius: '999px',
               cursor: 'pointer',
-              fontWeight: '500',
-              transition: '0.2s'
+              fontWeight: '700',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              transition: 'background-color 140ms ease, border-color 140ms ease'
             }}
-            onMouseOver={(e) => e.target.style.backgroundColor = '#c0392b'}
-            onMouseOut={(e) => e.target.style.backgroundColor = '#e74c3c'}
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(255,213,79,0.06)'; e.currentTarget.style.borderColor = 'rgba(255,213,79,0.28)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.borderColor = 'rgba(255,213,79,0.12)'; }}
           >
-            ⭐ Top Rated
+            <span style={{fontSize: '14px'}}>⭐</span>
+            Top Rated
           </button>
         </div>
       </div>

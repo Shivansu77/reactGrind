@@ -1,27 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CDN_URL, PLACEHOLDER_IMG } from '../utils/constants';
 
 const RestaurantCard = ({ resData }) => {
   
+  const [imageRounded, setImageRounded] = useState(true);
+
+  const [hovered, setHovered] = useState(false);
+  const [bgFill] = useState('rgba(30,136,229,0.06)');
+
   return (
     <div
+      onMouseEnter={() => { setImageRounded(false); setHovered(true); }}
+      onMouseLeave={() => { setImageRounded(true); setHovered(false); }}
       style={{
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#fff',
+        backgroundColor: hovered ? bgFill : '#111',
         borderRadius: '12px',
         overflow: 'hidden',
         cursor: 'pointer',
         height: '300px',
-        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-      }}
-      onMouseOver={(e) => {
-        e.currentTarget.style.transform = 'translateY(-6px)';
-        e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.2)';
-      }}
-      onMouseOut={(e) => {
-        e.currentTarget.style.transform = 'translateY(0)';
-        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.07)';
+        transition: 'background-color 200ms ease, border-color 200ms ease',
+        border: hovered ? '1px solid rgba(30,136,229,0.18)' : '1px solid rgba(255,255,255,0.04)'
       }}
     >
       <div style={{ width: '100%', height: '180px', overflow: 'hidden' }}>
@@ -31,17 +31,24 @@ const RestaurantCard = ({ resData }) => {
             : PLACEHOLDER_IMG}
           alt={resData?.info?.name || 'Restaurant'}
           onError={(e) => { e.currentTarget.src = PLACEHOLDER_IMG; }}
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            borderRadius: imageRounded ? '12px' : '0',
+            transition: 'border-radius 160ms ease',
+            cursor: 'pointer'
+          }}
         />
       </div>
 
-      <div style={{ padding: '12px', flex: '1 1 auto', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ padding: '12px', flex: '1 1 auto', display: 'flex', flexDirection: 'column', backgroundColor: hovered ? 'rgba(30,136,229,0.02)' : 'transparent', transition: 'background-color 200ms ease' }}>
         <h3
           style={{
             margin: '0 0 6px 0',
             fontSize: '16px',
             fontWeight: '600',
-            color: '#333',
+            color: '#e6e6e6',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             textOverflow: 'ellipsis'
@@ -54,7 +61,7 @@ const RestaurantCard = ({ resData }) => {
           style={{
             margin: '0 0 10px 0',
             fontSize: '13px',
-            color: '#777',
+            color: '#cfcfcf',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             textOverflow: 'ellipsis'
