@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import RestaurantCard from './RestaurantCard';
+import { RestaurantCard, withVegLabel } from './RestaurantCard';
 import Shimmer from './Shimmer';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
@@ -8,6 +8,7 @@ const Body = () => {
   const [listofRestaurants, setListofRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const RestaurantCardWithVegLabel = withVegLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -24,19 +25,45 @@ const Body = () => {
       }
 
       const json = await response.json();
+      console.log('Fetched restaurant data:', json);
 
-      const restaurantCard = json?.data?.cards?.find(card =>
-        card?.card?.card?.gridElements?.infoWithStyle?.restaurants
-      );
+      // Collect restaurants from any card that has them (some responses split lists)
+      const cards = json?.data?.cards || [];
+      let restaurants = [];
 
-      if (restaurantCard) {
-        const restaurants = restaurantCard.card.card.gridElements.infoWithStyle.restaurants;
-        setListofRestaurants(restaurants);
-        setFilteredRestaurants(restaurants);
+      cards.forEach((card) => {
+        const arr = card?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        if (Array.isArray(arr) && arr.length) restaurants.push(...arr);
+
+        // sometimes restaurants are nested deeper inside card.card.cards
+        const innerCards = card?.card?.card?.cards;
+        if (Array.isArray(innerCards)) {
+          innerCards.forEach((inner) => {
+            const arr2 = inner?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+            if (Array.isArray(arr2) && arr2.length) restaurants.push(...arr2);
+          });
+        }
+      });
+
+      // remove falsy and deduplicate by id
+      restaurants = restaurants.filter(Boolean);
+      const seen = new Set();
+      const unique = [];
+      restaurants.forEach((r) => {
+        const id = r?.info?.id;
+        if (id && !seen.has(id)) {
+          seen.add(id);
+          unique.push(r);
+        }
+      });
+
+      if (unique.length > 0) {
+        console.log(`Found ${unique.length} restaurants across cards`);
+        setListofRestaurants(unique);
+        setFilteredRestaurants(unique);
         return;
       }
 
-      // If payload shape isn't present, log and return (no mock fallback)
       console.warn('Restaurants payload not found in API response.');
       return;
     } catch (error) {
@@ -147,7 +174,15 @@ const Body = () => {
             key={resData.info?.id}
             style={{ textDecoration: 'none' }}
           >
-            <RestaurantCard resData={resData} />
+            {/** if the restaurant is veg then add a veg label to it */
+            
+              resData.info?.veg ? (
+                <RestaurantCardWithVegLabel resData={resData} />
+              ) : (
+                <RestaurantCard resData={resData} />
+              )
+            }
+            
           </Link>
         ))}
       </div>

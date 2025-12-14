@@ -1,4 +1,5 @@
 import React from 'react';
+import { CDN_URL, PLACEHOLDER_IMG } from '../utils/constants';
 
 const RestaurantCard = ({ resData }) => {
   
@@ -25,10 +26,11 @@ const RestaurantCard = ({ resData }) => {
     >
       <div style={{ width: '100%', height: '180px', overflow: 'hidden' }}>
         <img
-          src={resData.info?.cloudinaryImageId
-            ? `https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${resData.info.cloudinaryImageId}`
-            : "./food.jpg"}
-          alt="Restaurant"
+          src={resData?.info?.cloudinaryImageId
+            ? `${CDN_URL}fl_lossy,f_auto,q_auto,w_660/${resData.info.cloudinaryImageId}`
+            : PLACEHOLDER_IMG}
+          alt={resData?.info?.name || 'Restaurant'}
+          onError={(e) => { e.currentTarget.src = PLACEHOLDER_IMG; }}
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
       </div>
@@ -45,7 +47,7 @@ const RestaurantCard = ({ resData }) => {
             textOverflow: 'ellipsis'
           }}
         >
-          {resData.info?.name || resData.resName}
+          {resData?.info?.name || resData?.resName}
         </h3>
 
         <p
@@ -58,7 +60,7 @@ const RestaurantCard = ({ resData }) => {
             textOverflow: 'ellipsis'
           }}
         >
-          {resData.info?.cuisines?.join(', ') || 'Beverages, juice'}
+          {resData?.info?.cuisines?.join(', ') || 'Beverages, juice'}
         </p>
 
         <div
@@ -78,13 +80,13 @@ const RestaurantCard = ({ resData }) => {
               borderRadius: '10px'
             }}
           >
-            ⭐ {resData.info?.avgRating || '4.0'}
+            ⭐ {resData?.info?.avgRating || '4.0'}
           </span>
           <span style={{ color: '#f39c12', fontWeight: '500' }}>
-            {resData.info?.sla?.deliveryTime || '30'} min
+            {resData?.info?.sla?.deliveryTime || '30'} min
           </span>
           <span style={{ color: '#333', fontWeight: '600' }}>
-            {resData.info?.costForTwo || '₹200'}
+            {resData?.info?.costForTwo || '₹200'}
           </span>
         </div>
       </div>
@@ -92,4 +94,28 @@ const RestaurantCard = ({ resData }) => {
   );
 };
 
-export default RestaurantCard;
+const withVegLabel = (WrappedCard) => {
+  return (props) => {
+    return (
+      <div style={{ position: 'relative', display: 'block', width: '100%' }}>
+        <WrappedCard {...props} />
+        <div style={{
+          position: 'absolute',
+          top: '12px',
+          left: '12px',
+          backgroundColor: '#27ae60',
+          color: '#fff',
+          padding: '6px 10px',
+          borderRadius: '6px',
+          fontSize: '13px',
+          fontWeight: '700',
+          lineHeight: '1',
+        }}>
+          VEG
+        </div>
+      </div>
+    );
+  };
+};
+
+export { RestaurantCard, withVegLabel };
