@@ -23,12 +23,11 @@ const RestaurantMenu = () => {
       
       {/* Restaurant Info */}
       <div style={{ backgroundColor: '#fff', padding: '30px', borderRadius: '20px', boxShadow: '0 8px 30px rgba(0,0,0,0.1)', marginBottom: '30px', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '32px', fontWeight: '700', color: '#2c3e50', margin: '0 0 10px 0' }}>{name}</h2>
+        <h2 style={{ fontSize: '32px', fontWeight: '730', color: '#2c3e50', margin: '0 0 10px 0' }}>{name}</h2>
         <p style={{ fontSize: '16px', color: '#7f8c8d', margin: 0 }}>
           {cuisines?.join(', ')} - {costForTwoMessage}
         </p>
       </div>
-
       <h3 style={{ fontSize: '28px', fontWeight: '700', color: '#2c3e50', marginBottom: '25px', textAlign: 'center' }}>Menu</h3>
 
       {/* Menu Categories */}
