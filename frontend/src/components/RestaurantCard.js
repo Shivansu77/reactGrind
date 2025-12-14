@@ -35,7 +35,7 @@ const RestaurantCard = ({ resData }) => {
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            borderRadius: imageRounded ? '12px' : '0',
+            borderRadius: imageRounded ? '13px' : '0',
             transition: 'border-radius 160ms ease',
             cursor: 'pointer'
           }}
