@@ -50,11 +50,16 @@ const RestaurantCategory = ({ data }) => {
 
               {/* Image */}
               {item?.card?.info?.imageId && (
-                <img
-                  src={CDN_URL + item.card.info.imageId}
-                  alt={item.card.info.name}
-                  className="h-20 w-20 rounded-lg object-cover"
-                />
+                <div className="relative">
+                  <img
+                    src={CDN_URL + item.card.info.imageId}
+                    alt={item.card.info.name}
+                    className="h-20 w-20 rounded-lg object-cover"
+                  />
+                  <button className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white border border-gray-300 px-3 py-1 rounded text-sm font-medium hover:bg-gray-50">
+                    ADD
+                  </button>
+                </div>
               )}
             </div>
           ))}

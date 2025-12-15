@@ -17,7 +17,7 @@ const Body = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=31.3260&lng=75.5762"
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7041&lng=77.1025"
       );
 
       if (!response.ok) {
@@ -27,6 +27,7 @@ const Body = () => {
       }
 
       const json = await response.json();
+      console.log("Fetched restaurant data:", json);
 
       const cards = json?.data?.cards || [];
       let restaurants = [];
