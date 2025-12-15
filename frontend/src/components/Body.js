@@ -11,7 +11,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const RestaurantCardWithVegLabel = withVegLabel(RestaurantCard);
 
-  const {setUserName}= useContext(UserContext);
+  const {setUserName, userName}= useContext(UserContext);
 
   console.log(setUserName);
 
@@ -157,7 +157,7 @@ const Body = () => {
       </div>
       <div  className="max-w-[1200px] mx-auto mb-8 text-center">
         <span className="mr-2">Test Input:</span>
-        <input type="text" className=" rounded-lg text-black" placeholder=" Enter Name" onChange={(e) => setUserName(e.target.value)} />
+        <input type="text" className=" rounded-lg text-black" placeholder=" Enter Name" onChange={(e) => setUserName(e.target.value)} value={userName} />
       </div>
 
       {/* Restaurant Grid */}
