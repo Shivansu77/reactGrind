@@ -9,7 +9,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const Grocery = lazy(() => import('./components/Grocery'));
 const About = lazy(() => import('./components/About'));
-
+//approuter
 const appRouter = createBrowserRouter([
   {
     path: "/",
