@@ -25,7 +25,6 @@ class UserClass extends Component {
         });
       }
     } catch (error) {
-      console.log('GitHub API rate limit exceeded, using default data');
     }
   }
 

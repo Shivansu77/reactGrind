@@ -13,8 +13,6 @@ const Body = () => {
 
   const {setUserName, userName}= useContext(UserContext);
 
-  console.log(setUserName);
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -32,7 +30,6 @@ const Body = () => {
       }
 
       const json = await response.json();
-      console.log("Fetched restaurant data:", json);
 
       const cards = json?.data?.cards || [];
       let restaurants = [];

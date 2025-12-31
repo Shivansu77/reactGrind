@@ -2,14 +2,13 @@ import React, { useState, useEffect , useContext} from 'react';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
 import UserContext from '../utils/UserContext';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   const onlineStatus = useOnlineStatus();
   const {loggedInUser} = useContext(UserContext);
-  console.log(loggedInUser);
   useEffect(() => {
-    console.log("Header mounted or updated:", btnName);
   }, [btnName]);
 
   const navLinks = [
@@ -17,6 +16,9 @@ const Header = () => {
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contactus' },
   ];
+
+  //subrcribe to the store using useSelector
+  const cartItems = useSelector(store => store.cart.items);
 
   return (
     <div className="sticky top-0 z-50 bg-black shadow-lg border-b border-gray-800">
@@ -49,9 +51,10 @@ const Header = () => {
                 to="/grocery"
                 className="text-gray-200 no-underline font-medium text-base hover:text-white transition-colors flex items-center gap-1"
               >
-                🛒 Cart
+                🛒 Grocery
               </Link>
             </li>
+            <li className="text-sm font-medium">Cart - {cartItems.length} items</li>
             <li className="text-sm font-medium">{onlineStatus === false ? "🔴 Offline" : "🟢 Online"}</li>
             <li className="text-sm font-medium">User - {loggedInUser}</li>
           </ul>
