@@ -5,6 +5,7 @@ import App from './App';
 import ContactUs from './components/ContactUs';
 import Body from './components/Body';
 import RestaurantMenu from './components/RestaurantMenu';
+import Cart from './components/Cart';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const Grocery = lazy(() => import('./components/Grocery'));
@@ -42,6 +43,10 @@ const appRouter = createBrowserRouter([
             <Grocery />
           </Suspense>
         )
+      },
+      {
+        path: "/cart",
+        element: <Cart />
       }
     ]
   }

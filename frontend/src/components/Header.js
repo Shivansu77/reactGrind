@@ -54,7 +54,14 @@ const Header = () => {
                 🛒 Grocery
               </Link>
             </li>
-            <li className="text-sm font-medium">Cart - {cartItems.length} items</li>
+            <li>
+              <Link
+                to="/cart"
+                className="text-gray-200 no-underline font-medium text-base hover:text-white transition-colors cursor-pointer"
+              >
+                Cart - {cartItems.length} items
+              </Link>
+            </li>
             <li className="text-sm font-medium">{onlineStatus === false ? "🔴 Offline" : "🟢 Online"}</li>
             <li className="text-sm font-medium">User - {loggedInUser}</li>
           </ul>
