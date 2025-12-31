@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useContext, use } from "react";
 import { RestaurantCard, withVegLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from '../utils/UserContext';
 import '../index.css';
 const Body = () => {
   const [listofRestaurants, setListofRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const RestaurantCardWithVegLabel = withVegLabel(RestaurantCard);
+
+  const {setUserName, userName}= useContext(UserContext);
+
+  console.log(setUserName);
 
   useEffect(() => {
     fetchData();
@@ -129,6 +134,7 @@ const Body = () => {
           >
             <span className="text-base">🔍</span>
             <span className="opacity-95">Search</span>
+           
           </button>
 
           {/* Top Rated Button */}
@@ -148,6 +154,10 @@ const Body = () => {
             Top Rated
           </button>
         </div>
+      </div>
+      <div  className="max-w-[1200px] mx-auto mb-8 text-center">
+        <span className="mr-2">Test Input:</span>
+        <input type="text" className=" rounded-lg text-black" placeholder=" Enter Name" onChange={(e) => setUserName(e.target.value)} value={userName} />
       </div>
 
       {/* Restaurant Grid */}

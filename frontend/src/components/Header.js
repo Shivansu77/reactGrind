@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useContext} from 'react';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import UserContext from '../utils/UserContext';
+
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   const onlineStatus = useOnlineStatus();
+  const {loggedInUser} = useContext(UserContext);
+  console.log(loggedInUser);
   useEffect(() => {
     console.log("Header mounted or updated:", btnName);
   }, [btnName]);
@@ -49,6 +53,7 @@ const Header = () => {
               </Link>
             </li>
             <li className="text-sm font-medium">{onlineStatus === false ? "🔴 Offline" : "🟢 Online"}</li>
+            <li className="text-sm font-medium">User - {loggedInUser}</li>
           </ul>
 
           {/* Login/Logout Button */}

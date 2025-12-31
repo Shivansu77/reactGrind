@@ -70,3 +70,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 //1 today i learn about reconsillation algorithmn, diff algorithmn in react;
 //
+
+//i will install redux toolkit and redux.js   npm install @reduxjs/toolkit && npm i react-redux
+//we are now building our store
+//connect our store to our app
+//slice (cartSlide)
+//click add btn -> dispatch action -> reducer fxn 
