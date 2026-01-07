@@ -94,7 +94,7 @@ const Body = () => {
   if (listofRestaurants.length === 0) return <Shimmer />;
 
   return (
-    <div className="min-h-screen bg-black text-gray-200 font-inter px-5 py-10">
+    <div className="min-h-screen bg-gray-50 text-gray-800 font-inter px-5 py-10">
       {/* Search Section */}
       <div className="max-w-[1200px] mx-auto mb-8 text-center">
         <div className="flex flex-wrap justify-center gap-3">
