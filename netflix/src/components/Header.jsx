@@ -9,7 +9,7 @@ const Header = () => {
           <option>Hindi</option>
         </select>
         <button className="bg-red-600 text-white px-6 py-2 rounded font-semibold hover:bg-red-700 transition">
-          Sign Out
+          Sign Out.
         </button>
       </div>
     </div>
