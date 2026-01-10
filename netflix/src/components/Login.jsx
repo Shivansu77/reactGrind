@@ -64,12 +64,3 @@ const Login = () => {
 }
 
 export default Login
-        <p className="text-gray-400 text-sm mt-4 text-center">
-          {isSignIn ? "New to Netflix? " : "Already have an account? "}<span onClick={toggleSignIn} className="text-white cursor-pointer hover:underline">{isSignIn ? "Sign up now." : "Sign in now."}</span>
-        </p>
-      </div>
-    </div>
-  )
-}
-
-export default Login
