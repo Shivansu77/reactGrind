@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Login from './Login'
 import Browse from './Browse'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../utils/firebase.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { addUser, removeUser } from '../utils/userSlice.jsx'
-
+import ProtectedRoute from '../utils/ProctedRoute.jsx'
 const Body = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
@@ -37,9 +38,17 @@ const Body = () => {
     }
 
   return (
-    <div>
-       {user ? <Browse /> : <Login />}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={user ? <Navigate to="/browse" replace /> : <Login />}
+        />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/browse" element={<Browse />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

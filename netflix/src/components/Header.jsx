@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { signOut } from 'firebase/auth'
 import { auth } from '../utils/firebase.jsx'
 import { removeUser } from '../utils/userSlice.jsx'
+import avatarIcon from '../assets/icon.jpg'
 
 const Header = () => {
   const user = useSelector((state) => state.user.user);
-  const dispatch = useDispatch();
 
   const handleSignOut = async () => {
     try {
@@ -21,6 +21,7 @@ const Header = () => {
       <h1 className="text-red-600 text-4xl font-bold">NETFLIX</h1>
       <div className="flex items-center gap-4">
         <span className="text-white text-sm hidden sm:inline">
+          <img src={avatarIcon} alt="User Avatar" className="inline-block w-8 h-8  mr-2" />
           {user?.displayName || user?.email || 'Guest'}
         </span>
         <select className="bg-black text-white px-4 py-2 rounded border border-gray-600">
