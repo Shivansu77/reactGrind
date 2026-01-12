@@ -1,41 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Login from './Login'
 import Browse from './Browse'
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from '../utils/firebase.jsx'
-import { useDispatch, useSelector } from 'react-redux'
-import { addUser, removeUser } from '../utils/userSlice.jsx'
-import ProtectedRoute from '../utils/ProctedRoute.jsx'
-const Body = () => {
-    const dispatch = useDispatch();
-    const user = useSelector((state) => state.user.user);
-    const [loading, setLoading] = useState(true);
+import { useSelector } from 'react-redux'
 
-    useEffect(() => {
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-        if (user) {
-          const { uid, email, displayName } = user;
-          dispatch(addUser({ uid, email, displayName }));
-          console.log('User logged in:', { uid, email, displayName });
-        } else {
-          dispatch(removeUser());
-          console.log('User logged out');
-        }
-        setLoading(false);
-      });
-      return unsubscribe;
-    }, [dispatch]);
+const Body = ({ loading }) => {
+  const user = useSelector((state) => state.user.user);
 
-    console.log('Current user state:', user);
+  console.log('Current user state:', user);
 
-    if (loading) {
-      return (
-        <div className="min-h-screen bg-black flex items-center justify-center">
-          <div className="text-red-600 text-2xl">Loading...</div>
-        </div>
-      );
-    }
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-red-600 text-2xl">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <BrowserRouter>
@@ -44,9 +24,10 @@ const Body = () => {
           path="/"
           element={user ? <Navigate to="/browse" replace /> : <Login />}
         />
-        <Route element={<ProtectedRoute />}>
-          <Route path="/browse" element={<Browse />} />
-        </Route>
+        <Route
+          path="/browse"
+          element={user ? <Browse /> : <Navigate to="/" replace />}
+        />
       </Routes>
     </BrowserRouter>
   )

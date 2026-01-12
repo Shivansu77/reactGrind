@@ -1,8 +1,7 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { signOut } from 'firebase/auth'
 import { auth } from '../utils/firebase.jsx'
-import { removeUser } from '../utils/userSlice.jsx'
 import avatarIcon from '../assets/icon.jpg'
 
 const Header = () => {
