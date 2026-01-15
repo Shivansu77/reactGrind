@@ -14,9 +14,11 @@ const Maincontainer = () => {
   } = movies[0]
 
   return (
-    <div>
-      <Videotitle title={title} year={year} />
+    <div className="relative w-full overflow-hidden bg-black">
       <VideoBackground />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/20" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-transparent" />
+      <Videotitle title={title} year={year} />
     </div>
   )
 }
